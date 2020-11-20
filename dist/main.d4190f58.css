@@ -1,34 +1,29 @@
 .photo{
   text-align: center;
 }
-.pics1{
-   width: 291px;
+
+#randomImage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.pics3{
-  width: 313px;
+#randomImage img { 
+  height: 400px;
+  margin: 10px;
+  box-shadow: 0px 2px 4px 0px black;
 }
 
-.pics4{
-  width: 312px;
-}
-
-.pics5{
-  width: 309px;
-}
-.pics6{
-  width: 309px;
-}
-.pics7{
-  width: 338px;
-}
 .click{
   text-align: center;
 }
 
 .button{ 
   text-align: center;
-
+  margin-top: 35px;
+}
+.button button {
+  padding: 10px 20px;
 }
 
 

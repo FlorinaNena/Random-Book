@@ -10,23 +10,20 @@ import pics8 from "../assets/images/tower.jpg";
 const images = [pics1, pics2, pics3, pics4, pics5, pics6, pics7, pics8];
 const imageContainer = document.querySelector("#randomImage");
 
-images.forEach((image,index)=> {
-    const img = document.createElement("img");
-    img.src = image;
-    img.classList.add(`pics${index+1}`);
-    imageContainer.appendChild(img);
-});
-
-function randomize(lenght) {
-  return Math.floor((Math.random() * lenght));
+function createImage(className, imageSrc) {
+  const img = document.createElement('img');
+  img.src = imageSrc;
+  img.classList.add(className);
+  return img;
 }
+
+images.forEach((image,index) => imageContainer.appendChild(createImage(`pics${index+1}`, image)));
+
+const randomize = (lenght) =>  Math.floor((Math.random() * lenght));
 
 const button = document.getElementById ("randombtn");
 button.addEventListener("click", ()=> {
     const random = randomize (images.length);
     imageContainer.innerHTML = "";
-    const img = document.createElement("img");
-    img.src = images[random];
-    img.classList.add(`pics${random +1}`);
-    imageContainer.appendChild(img);
+    imageContainer.appendChild(createImage(`pics${random +1}`, images[random]));
 });
