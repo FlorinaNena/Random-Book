@@ -8,7 +8,7 @@ import pics7 from "../assets/images/the-outsider.jpg";
 import pics8 from "../assets/images/tower.jpg";
 
 const images = [pics1, pics2, pics3, pics4, pics5, pics6, pics7, pics8];
-const imageContainer = document.querySelector("#randomImage");
+const imageContainer = document.querySelector(".randomImage");
 
 function createImage(className, imageSrc) {
   const img = document.createElement('img');
@@ -17,13 +17,28 @@ function createImage(className, imageSrc) {
   return img;
 }
 
-images.forEach((image,index) => imageContainer.appendChild(createImage(`pics${index+1}`, image)));
+let currentImage = null;
 
-const randomize = (lenght) =>  Math.floor((Math.random() * lenght));
+images.forEach((image,index) => imageContainer.appendChild(createImage(`pics-${index+1}`, image)));
+
+const randomize = (length) =>  Math.floor((Math.random() * length));
 
 const button = document.getElementById ("randombtn");
 button.addEventListener("click", ()=> {
     const random = randomize (images.length);
-    imageContainer.innerHTML = "";
-    imageContainer.appendChild(createImage(`pics${random +1}`, images[random]));
+    const selectedImg = document.querySelector(`.pics-${random+1}`);
+    if(currentImage){
+      currentImage.classList.remove('active');
+    }
+    selectedImg.classList.add('active');
+    currentImage = selectedImg;
 });
+
+document
+  .getElementById ("clearbtn")
+  .addEventListener('click', () => {
+    if(currentImage) {
+      currentImage.classList.remove('active');
+      currentImage = null;
+    }
+  });

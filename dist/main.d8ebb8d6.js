@@ -155,7 +155,7 @@ var _tower = _interopRequireDefault(require("../assets/images/tower.jpg"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var images = [_.default, _bookPsycho.default, _lolita.default, _sea.default, _beforeIFall.default, _dexter.default, _theOutsider.default, _tower.default];
-var imageContainer = document.querySelector("#randomImage");
+var imageContainer = document.querySelector(".randomImage");
 
 function createImage(className, imageSrc) {
   var img = document.createElement('img');
@@ -164,21 +164,34 @@ function createImage(className, imageSrc) {
   return img;
 }
 
+var currentImage = null;
 images.forEach(function (image, index) {
-  return imageContainer.appendChild(createImage("pics".concat(index + 1), image));
+  return imageContainer.appendChild(createImage("pics-".concat(index + 1), image));
 });
 
-var randomize = function randomize(lenght) {
-  return Math.floor(Math.random() * lenght);
+var randomize = function randomize(length) {
+  return Math.floor(Math.random() * length);
 };
 
 var button = document.getElementById("randombtn");
 button.addEventListener("click", function () {
   var random = randomize(images.length);
-  imageContainer.innerHTML = "";
-  imageContainer.appendChild(createImage("pics".concat(random + 1), images[random]));
+  var selectedImg = document.querySelector(".pics-".concat(random + 1));
+
+  if (currentImage) {
+    currentImage.classList.remove('active');
+  }
+
+  selectedImg.classList.add('active');
+  currentImage = selectedImg;
 });
-},{"../assets/images/1984.jpg":"assets/images/1984.jpg","../assets/images/book-psycho.jpg":"assets/images/book-psycho.jpg","../assets/images/lolita.jpg":"assets/images/lolita.jpg","../assets/images/sea.jpg":"assets/images/sea.jpg","../assets/images/before-i-fall.jpg":"assets/images/before-i-fall.jpg","../assets/images/dexter.jpg":"assets/images/dexter.jpg","../assets/images/the-outsider.jpg":"assets/images/the-outsider.jpg","../assets/images/tower.jpg":"assets/images/tower.jpg"}],"C:/Users/Flavius/AppData/Roaming/npm-cache/_npx/15376/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+document.getElementById("clearbtn").addEventListener('click', function () {
+  if (currentImage) {
+    currentImage.classList.remove('active');
+    currentImage = null;
+  }
+});
+},{"../assets/images/1984.jpg":"assets/images/1984.jpg","../assets/images/book-psycho.jpg":"assets/images/book-psycho.jpg","../assets/images/lolita.jpg":"assets/images/lolita.jpg","../assets/images/sea.jpg":"assets/images/sea.jpg","../assets/images/before-i-fall.jpg":"assets/images/before-i-fall.jpg","../assets/images/dexter.jpg":"assets/images/dexter.jpg","../assets/images/the-outsider.jpg":"assets/images/the-outsider.jpg","../assets/images/tower.jpg":"assets/images/tower.jpg"}],"C:/Users/Flavius/AppData/Roaming/npm-cache/_npx/10628/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -206,7 +219,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60452" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61299" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -382,5 +395,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Flavius/AppData/Roaming/npm-cache/_npx/15376/node_modules/parcel/src/builtins/hmr-runtime.js","scripts/main.js"], null)
+},{}]},{},["C:/Users/Flavius/AppData/Roaming/npm-cache/_npx/10628/node_modules/parcel/src/builtins/hmr-runtime.js","scripts/main.js"], null)
 //# sourceMappingURL=/main.d8ebb8d6.js.map
