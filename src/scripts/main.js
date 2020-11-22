@@ -8,6 +8,7 @@ import pics7 from "../assets/images/the-outsider.jpg";
 import pics8 from "../assets/images/tower.jpg";
 
 const images = [pics1, pics2, pics3, pics4, pics5, pics6, pics7, pics8];
+
 const imageContainer = document.querySelector(".randomImage");
 
 function createImage(className, imageSrc) {
@@ -18,20 +19,41 @@ function createImage(className, imageSrc) {
 }
 
 let currentImage = null;
+const DICE = 20;
+const INITIAL_INTERVAL = 150;
+let isRolling = false;
 
 images.forEach((image,index) => imageContainer.appendChild(createImage(`pics-${index+1}`, image)));
 
 const randomize = (length) =>  Math.floor((Math.random() * length));
 
+const selectImage = (imageClass) => {
+  const selectedImg = document.querySelector(imageClass);
+  if(currentImage){
+    currentImage.classList.remove('active');
+  }
+  selectedImg.classList.add('active');
+  currentImage = selectedImg;
+}
+
 const button = document.getElementById ("randombtn");
-button.addEventListener("click", ()=> {
+button.addEventListener("click", () => {
+    if(isRolling) return;
+
+    let attempts = DICE;
     const random = randomize (images.length);
-    const selectedImg = document.querySelector(`.pics-${random+1}`);
-    if(currentImage){
-      currentImage.classList.remove('active');
-    }
-    selectedImg.classList.add('active');
-    currentImage = selectedImg;
+    selectImage(`.pics-${random+1}`);
+    isRolling = true;
+    const itv = setInterval(() => {
+      const random = randomize (images.length);
+      selectImage(`.pics-${random+1}`);
+
+      if(attempts == 0) {
+        clearInterval(itv);
+        isRolling = false;
+      }
+      attempts--;
+    }, INITIAL_INTERVAL);
 });
 
 document
@@ -42,3 +64,4 @@ document
       currentImage = null;
     }
   });
+
